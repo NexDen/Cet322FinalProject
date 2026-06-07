@@ -1,0 +1,42 @@
+@using Cet322FinalProject.Data.Entities
+@model Vehicle
+@{
+    ViewData["Title"] = "Vehicle Details";
+}
+
+<div class="mb-4">
+    <span class="page-title">Vehicle Details</span>
+</div>
+
+<table class="table table-bordered w-auto mb-4">
+    <tbody>
+        <tr>
+            <th class="text-muted">Plate Number</th>
+            <td>@Model.PlateNo</td>
+        </tr>
+        <tr>
+            <th class="text-muted">Model</th>
+            <td>@Model.Model</td>
+        </tr>
+        <tr>
+            <th class="text-muted">Production Year</th>
+            <td>@Model.ProductionYear</td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="mb-2 fw-semibold small text-muted text-uppercase" style="letter-spacing:.04em">Vehicle Certification</div>
+@if (Model.VehicleCertification != null && !string.IsNullOrEmpty(Model.VehicleCertification.FilePath))
+{
+    <p class="mb-1 text-muted small">Uploaded @Model.VehicleCertification.CreatedDate.ToString("yyyy-MM-dd")</p>
+    <a href="@Model.VehicleCertification.FilePath" target="_blank" class="btn btn-outline-secondary btn-sm mb-4">View Document</a>
+}
+else
+{
+    <p class="text-muted small mb-4">No certification document uploaded.</p>
+}
+
+<div class="d-flex gap-2">
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary btn-sm">Edit</a>
+    <a asp-action="Index" class="btn btn-outline-secondary btn-sm">Back</a>
+</div>

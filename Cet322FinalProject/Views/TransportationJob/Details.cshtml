@@ -1,0 +1,83 @@
+@using Cet322FinalProject.Data.Entities
+@model TransportationJob
+@{
+    ViewData["Title"] = "Job Details";
+}
+
+<div class="mb-4">
+    <span class="page-title">Job Details</span>
+</div>
+
+<table class="table table-bordered w-auto mb-4">
+    <tbody>
+        <tr>
+            <th class="text-muted">Order Date</th>
+            <td>@Model.OrderDate?.ToString("yyyy-MM-dd")</td>
+        </tr>
+        <tr>
+            <th class="text-muted">Delivery Date</th>
+            <td>@Model.DeliveryDate?.ToString("yyyy-MM-dd")</td>
+        </tr>
+        <tr>
+            <th class="text-muted">Created</th>
+            <td>@Model.CreatedDate?.ToString("yyyy-MM-dd HH:mm") by @Model.CreatedBy?.UserName</td>
+        </tr>
+        <tr>
+            <th class="text-muted">Driver</th>
+            <td>@Model.Driver?.Name @Model.Driver?.Surname</td>
+        </tr>
+        <tr>
+            <th class="text-muted">Vehicle</th>
+            <td>@Model.Vehicle?.PlateNo — @Model.Vehicle?.Model</td>
+        </tr>
+        <tr>
+            <th class="text-muted">Commodity</th>
+            <td>@Model.CommodityType</td>
+        </tr>
+        <tr>
+            <th class="text-muted">Tonnage</th>
+            <td>@Model.Tonnage t</td>
+        </tr>
+        <tr>
+            <th class="text-muted">Sale Cost</th>
+            <td>@Model.SaleCost?.ToString("C")</td>
+        </tr>
+        <tr>
+            <th class="text-muted">Loading Address</th>
+            <td>@(Model.LoadingAddress ?? "—")</td>
+        </tr>
+        <tr>
+            <th class="text-muted">Unloading Address</th>
+            <td>@(Model.UnloadingAddress ?? "—")</td>
+        </tr>
+        <tr>
+            <th class="text-muted">Status</th>
+            <td>
+                @if (Model.IsActive == true)
+                {
+                    <span class="badge bg-success fw-normal">Active</span>
+                }
+                else
+                {
+                    <span class="badge bg-secondary fw-normal">Inactive</span>
+                }
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="mb-2 fw-semibold small text-muted text-uppercase" style="letter-spacing:.04em">Delivery Document</div>
+@if (Model.DeliveryDocument != null && !string.IsNullOrEmpty(Model.DeliveryDocument.FilePath))
+{
+    <p class="mb-1 text-muted small">Uploaded @Model.DeliveryDocument.CreatedDate.ToString("yyyy-MM-dd")</p>
+    <a href="@Model.DeliveryDocument.FilePath" target="_blank" class="btn btn-outline-secondary btn-sm mb-4">View Document</a>
+}
+else
+{
+    <p class="text-muted small mb-4">No delivery document uploaded.</p>
+}
+
+<div class="d-flex gap-2">
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary btn-sm">Edit</a>
+    <a asp-action="Index" class="btn btn-outline-secondary btn-sm">Back</a>
+</div>

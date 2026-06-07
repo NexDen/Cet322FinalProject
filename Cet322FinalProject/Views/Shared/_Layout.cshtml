@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>@ViewData["Title"] - CeTransport</title>
+    <script type="importmap"></script>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
+    <link rel="stylesheet" href="~/Cet322FinalProject.styles.css" asp-append-version="true"/>
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-expand-sm border-bottom">
+        <div class="container">
+            <a class="navbar-brand fw-semibold" asp-controller="Home" asp-action="Index">CeTransport</a>
+            @if (User.Identity!.IsAuthenticated)
+            {
+                <div class="navbar-nav me-auto">
+                    <a class="nav-link" asp-controller="Driver" asp-action="Index">Drivers</a>
+                    <a class="nav-link" asp-controller="Vehicle" asp-action="Index">Vehicles</a>
+                    <a class="nav-link" asp-controller="TransportationJob" asp-action="Index">Jobs</a>
+                </div>
+                <div class="dropdown">
+                    <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                        @User.Identity.Name
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li>
+                            <form method="post" action="/logout">
+                                @Html.AntiForgeryToken()
+                                <button type="submit" class="dropdown-item">Logout</button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            }
+            else
+            {
+                <div class="ms-auto d-flex gap-2">
+                    <a asp-controller="Login" asp-action="Index" class="btn btn-outline-secondary btn-sm">Login</a>
+                    <a asp-controller="Login" asp-action="Register" class="btn btn-primary btn-sm">Register</a>
+                </div>
+            }
+        </div>
+    </nav>
+</header>
+<div class="container py-4">
+    <main role="main">
+        @RenderBody()
+    </main>
+</div>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+@await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

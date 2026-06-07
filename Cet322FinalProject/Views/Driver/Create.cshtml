@@ -1,0 +1,38 @@
+@using Cet322FinalProject.Data.Entities
+@model Driver
+@{
+    ViewData["Title"] = "Add Driver";
+}
+
+<div class="mb-4">
+    <span class="page-title">Add Driver</span>
+</div>
+
+<div class="row">
+    <div class="col-md-5">
+        <form asp-action="Create" method="post" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label asp-for="Name" class="form-label">First Name</label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger small"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Surname" class="form-label">Last Name</label>
+                <input asp-for="Surname" class="form-control" />
+                <span asp-validation-for="Surname" class="text-danger small"></span>
+            </div>
+            <div class="mb-4">
+                <label asp-for="LicenseFile" class="form-label">License Document</label>
+                <input asp-for="LicenseFile" type="file" class="form-control" />
+            </div>
+            <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-primary btn-sm">Save</button>
+                <a asp-action="Index" class="btn btn-outline-secondary btn-sm">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

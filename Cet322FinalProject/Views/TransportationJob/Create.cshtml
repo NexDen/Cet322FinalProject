@@ -1,0 +1,89 @@
+@using Cet322FinalProject.Data.Entities
+@model TransportationJob
+@{
+    ViewData["Title"] = "New Job";
+}
+
+<div class="mb-4">
+    <span class="page-title">New Transportation Job</span>
+</div>
+
+<div class="row">
+    <div class="col-md-7">
+        <form asp-action="Create" method="post" enctype="multipart/form-data">
+
+            <div class="row mb-3">
+                <div class="col">
+                    <label asp-for="OrderDate" class="form-label">Order Date</label>
+                    <input asp-for="OrderDate" type="date" class="form-control" />
+                    <span asp-validation-for="OrderDate" class="text-danger small"></span>
+                </div>
+                <div class="col">
+                    <label asp-for="DeliveryDate" class="form-label">Delivery Date</label>
+                    <input asp-for="DeliveryDate" type="date" class="form-control" />
+                    <span asp-validation-for="DeliveryDate" class="text-danger small"></span>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col">
+                    <label asp-for="DriverId" class="form-label">Driver</label>
+                    <select asp-for="DriverId" asp-items="ViewBag.Drivers" class="form-select">
+                        <option value="">-- Select Driver --</option>
+                    </select>
+                    <span asp-validation-for="DriverId" class="text-danger small"></span>
+                </div>
+                <div class="col">
+                    <label asp-for="VehicleId" class="form-label">Vehicle</label>
+                    <select asp-for="VehicleId" asp-items="ViewBag.Vehicles" class="form-select">
+                        <option value="">-- Select Vehicle --</option>
+                    </select>
+                    <span asp-validation-for="VehicleId" class="text-danger small"></span>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col">
+                    <label asp-for="CommodityType" class="form-label">Commodity</label>
+                    <input asp-for="CommodityType" class="form-control" />
+                    <span asp-validation-for="CommodityType" class="text-danger small"></span>
+                </div>
+                <div class="col">
+                    <label asp-for="Tonnage" class="form-label">Tonnage (t)</label>
+                    <input asp-for="Tonnage" class="form-control" />
+                    <span asp-validation-for="Tonnage" class="text-danger small"></span>
+                </div>
+                <div class="col">
+                    <label asp-for="SaleCost" class="form-label">Sale Cost</label>
+                    <input asp-for="SaleCost" class="form-control" />
+                    <span asp-validation-for="SaleCost" class="text-danger small"></span>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="LoadingAddress" class="form-label">Loading Address</label>
+                <input asp-for="LoadingAddress" class="form-control" placeholder="e.g. Istanbul, Turkey" />
+                <span asp-validation-for="LoadingAddress" class="text-danger small"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="UnloadingAddress" class="form-label">Unloading Address</label>
+                <input asp-for="UnloadingAddress" class="form-control" placeholder="e.g. Ankara, Turkey" />
+                <span asp-validation-for="UnloadingAddress" class="text-danger small"></span>
+            </div>
+
+            <div class="mb-4">
+                <label class="form-label">Delivery Document</label>
+                <input type="file" name="deliveryDocumentFile" class="form-control" />
+            </div>
+
+            <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-primary btn-sm">Save</button>
+                <a asp-action="Index" class="btn btn-outline-secondary btn-sm">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

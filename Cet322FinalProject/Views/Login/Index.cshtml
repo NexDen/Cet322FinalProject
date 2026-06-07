@@ -1,0 +1,33 @@
+@{
+    ViewData["Title"] = "Login";
+}
+
+<div class="d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+    <div class="d-flex flex-column gap-3" style="width: 100%; max-width: 360px; padding: 30px;">
+
+        <h1 class="text-center" style="font-size: 4rem;">CeTransport</h1>
+
+        @if (ViewBag.Error != null)
+        {
+            <div class="alert alert-danger">@ViewBag.Error</div>
+        }
+
+        <form method="post" asp-action="Login">
+            <div class="d-flex flex-column gap-3">
+                <input name="username" type="text" class="form-control" placeholder="Username" />
+
+                <input name="password" type="password" class="form-control" placeholder="Password" />
+
+                <div class="d-flex align-items-center gap-2">
+                    <input id="rememberMe" name="rememberMe" type="checkbox" class="form-check-input m-0" value="true" />
+                    <label for="rememberMe" class="form-check-label">Remember Me</label>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100">Login</button>
+
+                <a asp-action="Register" class="text-center">Don't have an account? Register</a>
+            </div>
+        </form>
+
+    </div>
+</div>

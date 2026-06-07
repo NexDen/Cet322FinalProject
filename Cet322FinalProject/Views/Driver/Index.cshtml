@@ -1,0 +1,33 @@
+@using Cet322FinalProject.Data.Entities
+@model IEnumerable<Driver>
+@{
+    ViewData["Title"] = "Drivers";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <span class="page-title">Drivers</span>
+    <a asp-action="Create" class="btn btn-primary btn-sm">Add Driver</a>
+</div>
+
+<table class="table table-hover align-middle">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Surname</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var driver in Model)
+        {
+            <tr>
+                <td>@driver.Name</td>
+                <td>@driver.Surname</td>
+                <td class="text-end">
+                    <a asp-action="Details" asp-route-id="@driver.Id" class="text-decoration-none me-3">Details</a>
+                    <a asp-action="Edit" asp-route-id="@driver.Id" class="text-decoration-none">Edit</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

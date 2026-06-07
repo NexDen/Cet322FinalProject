@@ -1,0 +1,45 @@
+@using Cet322FinalProject.Data.Entities
+@model Vehicle
+@{
+    ViewData["Title"] = "Edit Vehicle";
+}
+
+<div class="mb-4">
+    <span class="page-title">Edit Vehicle</span>
+</div>
+
+<div class="row">
+    <div class="col-md-5">
+        <form asp-action="Edit" method="post" enctype="multipart/form-data">
+            <input type="hidden" asp-for="Id" />
+            <div class="mb-3">
+                <label asp-for="PlateNo" class="form-label">Plate Number</label>
+                <input asp-for="PlateNo" class="form-control" />
+                <span asp-validation-for="PlateNo" class="text-danger small"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Model" class="form-label">Model</label>
+                <input asp-for="Model" class="form-control" />
+                <span asp-validation-for="Model" class="text-danger small"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="ProductionYear" class="form-label">Production Year</label>
+                <input asp-for="ProductionYear" class="form-control" />
+                <span asp-validation-for="ProductionYear" class="text-danger small"></span>
+            </div>
+            <div class="mb-4">
+                <label asp-for="CertificationFile" class="form-label">Certification Document</label>
+                <input asp-for="CertificationFile" type="file" class="form-control" />
+                <div class="form-text">Leave blank to keep the existing document.</div>
+            </div>
+            <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-primary btn-sm">Save</button>
+                <a asp-action="Index" class="btn btn-outline-secondary btn-sm">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

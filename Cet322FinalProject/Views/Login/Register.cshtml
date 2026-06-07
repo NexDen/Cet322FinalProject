@@ -1,0 +1,54 @@
+@using Cet322FinalProject.Data.Entities
+@{
+    ViewData["Title"] = "Register";
+    var companies = ViewBag.Companies as List<Company> ?? new List<Company>();
+}
+
+<div class="d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+    <div class="d-flex flex-column gap-3" style="width: 100%; max-width: 400px; padding: 30px;">
+
+        <h1 class="text-center" style="font-size: 3rem;">CeTransport</h1>
+        <h5 class="text-center text-muted">Create an account</h5>
+
+        @if (ViewBag.Error != null)
+        {
+            <div class="alert alert-danger">@ViewBag.Error</div>
+        }
+
+        <form method="post" asp-action="Register">
+            <div class="d-flex flex-column gap-3">
+
+                <div class="row g-2">
+                    <div class="col">
+                        <input name="name" type="text" class="form-control" placeholder="First Name" required />
+                    </div>
+                    <div class="col">
+                        <input name="surname" type="text" class="form-control" placeholder="Last Name" required />
+                    </div>
+                </div>
+
+                <input name="username" type="text" class="form-control" placeholder="Username" required />
+
+                <input name="email" type="email" class="form-control" placeholder="Email" required />
+
+                <select name="companyId" class="form-select" required>
+                    <option value="" disabled selected>Select Company</option>
+                    @foreach (var company in companies)
+                    {
+                        <option value="@company.Id">@company.Name</option>
+                    }
+                </select>
+
+                <input name="password" type="password" class="form-control" placeholder="Password" required />
+
+                <input name="confirmPassword" type="password" class="form-control" placeholder="Confirm Password" required />
+
+                <button type="submit" class="btn btn-primary w-100">Register</button>
+
+                <a asp-action="Index" class="text-center">Already have an account? Log in</a>
+
+            </div>
+        </form>
+
+    </div>
+</div>
